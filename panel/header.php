@@ -1,9 +1,10 @@
 <?php 
-include 'init_db.php';
+//include '/../base/init_db.php';
 require 'auth.php';
 
 // Solo usuarios logueados pueden ver esta página
-protegerPagina(); ?>
+protegerPagina(); 
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

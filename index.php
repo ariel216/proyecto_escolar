@@ -1,66 +1,70 @@
-<?php include 'header.php';
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Colegio San Ignacio de Loyola</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+  <body class="bg-primary text-white text-center">
+    <div class="container py-5">
+     <div class="logo mb-3">
+        <img src="img/logo.png" alt="Logo" class="rounded-circle"  height="150">
+      </div>
+      <h1>Colegio San Ignacio de Loyola</h1>
+      <p class="fst-italic">En todo amar y servir</p>
+      <h3 class="mt-4">Plataforma Educativa</h3>
 
-$tab = $_GET['tab'] ?? 'estudiantes';
-$db = new SQLite3('database.db');
+      <div class="row justify-content-center mt-4">
+        <div class="col-md-4">
+          <div class="card p-3 shadow">
+            <h5>Portal para Padres</h5>
+            <p>Consulte información académica y administrativa de su hijo</p>
+            <ul class="text-start">
+              <li>Asistencia y atrasos</li>
+              <li>Tareas y prácticas</li>
+              <li>Comunicados y memorándums</li>
+              <li>Estado de mensualidades</li>
+            </ul>
+            <a href="portal_padres.php" class="btn btn-primary">Ingresar</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3 shadow">
+            <h5>Panel de Administración</h5>
+            <p>Gestione estudiantes y registre información académica</p>
+            <ul class="text-start">
+              <li>Registro de estudiantes</li>
+              <li>Control de asistencia</li>
+              <li>Gestión de tareas</li>
+              <li>Administración de pagos</li>
+            </ul>
+            <a href="panel/index.php" class="btn btn-danger">Ingresar</a>
+          </div>
+        </div>
+      </div>
 
-// --- Insertar registro ---
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    switch ($tab) {
-        case 'estudiantes':
-            $stmt = $db->prepare("INSERT INTO estudiantes (carnet, nombre, curso) VALUES (:c, :n, :cu)");
-            $stmt->bindValue(':c', $_POST['carnet']);
-            $stmt->bindValue(':n', $_POST['nombre']);
-            $stmt->bindValue(':cu', $_POST['curso']);
-            $stmt->execute();
-            break;
-        case 'asistencias':
-            $stmt = $db->prepare("INSERT INTO asistencias (materia, fecha, estado) VALUES (:m, :f, :e)");
-            $stmt->bindValue(':m', $_POST['materia']);
-            $stmt->bindValue(':f', $_POST['fecha']);
-            $stmt->bindValue(':e', $_POST['estado']);
-            $stmt->execute();
-            break;
-        case 'tareas':
-            $stmt = $db->prepare("INSERT INTO tareas (materia, titulo, tipo, estado, fecha) VALUES (:m,:t,:ti,:e,:f)");
-            $stmt->bindValue(':m', $_POST['materia']);
-            $stmt->bindValue(':t', $_POST['titulo']);
-            $stmt->bindValue(':ti', $_POST['tipo']);
-            $stmt->bindValue(':e', $_POST['estado']);
-            $stmt->bindValue(':f', $_POST['fecha']);
-            $stmt->execute();
-            break;
-        case 'comunicados':
-            $stmt = $db->prepare("INSERT INTO comunicados (titulo, mensaje, fecha) VALUES (:t,:msj,:f)");
-            $stmt->bindValue(':t', $_POST['titulo']);
-            $stmt->bindValue(':msj', $_POST['mensaje']);
-            $stmt->bindValue(':f', $_POST['fecha']);
-            $stmt->execute();
-            break;
-        case 'memorandos':
-            $stmt = $db->prepare("INSERT INTO memorandos (titulo, descripcion, fecha) VALUES (:t,:d,:f)");
-            $stmt->bindValue(':t', $_POST['titulo']);
-            $stmt->bindValue(':d', $_POST['descripcion']);
-            $stmt->bindValue(':f', $_POST['fecha']);
-            $stmt->execute();
-            break;
-        case 'mensualidades':
-            $stmt = $db->prepare("INSERT INTO mensualidades (mes, monto, estado, fecha_pago) VALUES (:m,:mo,:e,:f)");
-            $stmt->bindValue(':m', $_POST['mes']);
-            $stmt->bindValue(':mo', $_POST['monto']);
-            $stmt->bindValue(':e', $_POST['estado']);
-            $stmt->bindValue(':f', $_POST['fecha_pago']);
-            $stmt->execute();
-            break;
-    }
-}
+      <div class="alert alert-info mt-4 text-start">
+        <b>Información Importante:</b>
+        <ul>
+          <li>
+            Los padres de familia pueden consultar información usando el carnet
+            y curso del estudiante
+          </li>
+          <li>
+            El personal docente y administrativo gestiona todo desde el panel de
+            administración
+          </li>
+          <li>La información se almacena de forma segura y en tiempo real</li>
+        </ul>
+      </div>
 
-// --- Eliminar registro ---
-if (isset($_GET['delete'])) {
-    $id = (int)$_GET['delete'];
-    $db->exec("DELETE FROM $tab WHERE id=$id");
-}
-
-// --- Mostrar formulario y registros ---
-include "views/$tab.php";
-
-include 'footer.php';
+      <footer class="mt-4 small">
+        Colegio San Ignacio de Loyola - Sistema de Gestión Educativa
+      </footer>
+    </div>
+  </body>
+</html>

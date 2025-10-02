@@ -1,5 +1,5 @@
 <?php
-$db = new SQLite3('database.db');
+$db = new SQLite3('./panel/database.db');
 
 // Si se envió el formulario
 $estudiante = null;
@@ -17,12 +17,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $estudiante = $result->fetchArray(SQLITE3_ASSOC);
 
     if ($estudiante) {
-        // Obtener datos relacionados
-        $resumen['asistencias'] = $db->query("SELECT * FROM asistencias ORDER BY fecha DESC LIMIT 5");
-        $resumen['tareas']      = $db->query("SELECT * FROM tareas ORDER BY fecha DESC LIMIT 5");
-        $resumen['comunicados'] = $db->query("SELECT * FROM comunicados ORDER BY fecha DESC LIMIT 5");
-        $resumen['memorandos']  = $db->query("SELECT * FROM memorandos ORDER BY fecha DESC LIMIT 5");
-        $resumen['mensualidades'] = $db->query("SELECT * FROM mensualidades ORDER BY fecha DESC LIMIT 5");
+        $id_est = $estudiante['id'];
+
+        // Obtener datos relacionados filtrados por estudiante
+        $stmt = $db->prepare("SELECT * FROM asistencias WHERE id_estudiante = :id ORDER BY fecha DESC LIMIT 5");
+        $stmt->bindValue(':id', $id_est, SQLITE3_INTEGER);
+        $resumen['asistencias'] = $stmt->execute();
+
+        $stmt = $db->prepare("SELECT * FROM tareas WHERE id_estudiante = :id ORDER BY fecha DESC LIMIT 5");
+        $stmt->bindValue(':id', $id_est, SQLITE3_INTEGER);
+        $resumen['tareas'] = $stmt->execute();
+
+        $stmt = $db->prepare("SELECT * FROM comunicados WHERE id_estudiante = :id ORDER BY fecha DESC LIMIT 5");
+        $stmt->bindValue(':id', $id_est, SQLITE3_INTEGER);
+        $resumen['comunicados'] = $stmt->execute();
+
+        $stmt = $db->prepare("SELECT * FROM memorandos WHERE id_estudiante = :id ORDER BY fecha DESC LIMIT 5");
+        $stmt->bindValue(':id', $id_est, SQLITE3_INTEGER);
+        $resumen['memorandos'] = $stmt->execute();
+
+        $stmt = $db->prepare("SELECT * FROM mensualidades WHERE id_estudiante = :id ORDER BY fecha_pago DESC LIMIT 5");
+        $stmt->bindValue(':id', $id_est, SQLITE3_INTEGER);
+        $resumen['mensualidades'] = $stmt->execute();
     }
 }
 ?>
@@ -35,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body class="bg-light">
 <div class="container py-5">
-    <h1 class="mb-4 text-center">Buscar Estudiante</h1>
+    <h1 class="mb-4 text-center">PADRES Y MADRES DE FAMILIA</h1>
 
     <!-- Formulario de búsqueda -->
     <div class="card p-4 shadow-sm mb-4">
@@ -57,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <?php if ($_SERVER["REQUEST_METHOD"] === "POST"): ?>
         <?php if ($estudiante): ?>
             <div class="card shadow-sm p-4 mb-4">
-                <h3>📌 Información del Estudiante</h3>
+                <h3>Información del Estudiante</h3>
                 <p><strong>Carnet:</strong> <?= htmlspecialchars($estudiante['carnet']) ?></p>
                 <p><strong>Nombre:</strong> <?= htmlspecialchars($estudiante['nombre']) ?></p>
                 <p><strong>Curso:</strong> <?= htmlspecialchars($estudiante['curso']) ?></p>
@@ -132,7 +148,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
 
         <?php else: ?>
-            <div class="alert alert-danger">⚠️ No se encontró al estudiante con esos datos.</div>
+            <div class="alert alert-danger">No se encontró al estudiante con esos datos.</div>
         <?php endif; ?>
     <?php endif; ?>
 </div>
