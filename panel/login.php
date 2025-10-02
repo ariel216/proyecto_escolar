@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $stmt->execute()->fetchArray(SQLITE3_ASSOC);
 
     if ($result && password_verify($password, $result['clave'])) {
-        // Guardar sesión
         $_SESSION['id'] = $result['id'];
         $_SESSION['usuario'] = $result['usuario'];
 
@@ -32,9 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body class="bg-light">
-    <div class="container d-flex align-items-center justify-content-center vh-100">
+<body class="bg-light">   
+    <div class="container d-flex align-items-center justify-content-center vh-100">        
         <div class="card shadow p-4" style="max-width:400px; width:100%;">
+            <div class="text-center logo mb-3">
+                <img src="../img/logo.png" alt="Logo" class="rounded-circle"  height="150">
+            </div>
             <h4 class="text-center mb-3">Iniciar Sesión</h4>
             
             <?php if ($error): ?>
@@ -50,7 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label class="form-label">Contraseña</label>
                     <input type="password" name="password" class="form-control" required>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+                <button type="submit" class="btn btn-primary">Ingresar</button>
+                <a href="../index.php" class="btn btn-secondary">Inicio</a>
             </form>
         </div>
     </div>

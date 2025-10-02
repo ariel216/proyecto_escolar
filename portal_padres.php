@@ -48,23 +48,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <meta charset="UTF-8">
   <title>Buscar Estudiante</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
 </head>
 <body class="bg-light">
 <div class="container py-5">
-    <h1 class="mb-4 text-center">PADRES Y MADRES DE FAMILIA</h1>
-
+    <div class="text-center logo mb-3">
+        <img src="img/logo.png" alt="Logo" class="rounded-circle"  height="150">
+    </div>
+     <h1 class="mb-4 text-center">Portal para Padres</h1>
     <!-- Formulario de búsqueda -->
     <div class="card p-4 shadow-sm mb-4">
         <form method="POST">
             <div class="row g-3">
-                <div class="col-md-5">
+                <div class="col-md-4">
                     <input type="text" name="carnet" class="form-control" placeholder="Carnet" required>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-4">
                     <input type="text" name="curso" class="form-control" placeholder="Curso (Ej: 1A, 3B)" required>
                 </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary w-100">Buscar</button>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                    <a href="index.php" class="btn btn-secondary">Volver a Inicio</a>
                 </div>
             </div>
         </form>
