@@ -64,7 +64,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <input type="text" name="carnet" class="form-control" placeholder="Carnet" required>
                 </div>
                 <div class="col-md-4">
-                    <input type="text" name="curso" class="form-control" placeholder="Curso (Ej: 1A, 3B)" required>
+                    <select name="curso" class="form-control" required>
+                        <option value="">Seleccione curso</option>
+                        <?php
+                            $cursos = ["1A","1B","2A","2B","3A","3B","4A","4B","5A","5B","6A","6B"];
+                            foreach ($cursos as $c) {
+                                echo "<option value='$c'>$c</option>";
+                            }
+                        ?>
+                    </select>
                 </div>
                 <div class="col-md-4">
                     <button type="submit" class="btn btn-primary">Buscar</button>
