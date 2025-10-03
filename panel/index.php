@@ -2,17 +2,18 @@
 include 'header.php';
 
 $tab = $_GET['tab'] ?? 'estudiantes';
-$db = new SQLite3('database.db');
+$db = new SQLite3('./base/database.db');
 
 // --- Insertar registro ---
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     switch ($tab) {
         case 'estudiantes':
-            $stmt = $db->prepare("INSERT INTO estudiantes (carnet, nombre, curso) 
-                                  VALUES (:c, :n, :cu)");
+            $stmt = $db->prepare("INSERT INTO estudiantes (carnet, nombre, curso, telefono) 
+                                  VALUES (:c, :n, :cu, :t)");
             $stmt->bindValue(':c', $_POST['carnet']);
             $stmt->bindValue(':n', $_POST['nombre']);
             $stmt->bindValue(':cu', $_POST['curso']);
+            $stmt->bindValue(':t', $_POST['telefono']);
             $stmt->execute();
             break;
 
@@ -39,12 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             break;
 
         case 'comunicados':
-            $stmt = $db->prepare("INSERT INTO comunicados (titulo, mensaje, fecha, id_estudiante) 
+            $stmt = $db->prepare("INSERT INTO comunicados (titulo, mensaje, fecha) 
                                   VALUES (:t, :msj, :f, :id)");
             $stmt->bindValue(':t', $_POST['titulo']);
             $stmt->bindValue(':msj', $_POST['mensaje']);
             $stmt->bindValue(':f', $_POST['fecha']);
-            $stmt->bindValue(':id', $_POST['id_estudiante']);
             $stmt->execute();
             break;
 
@@ -78,7 +78,7 @@ if (isset($_GET['delete'])) {
 }
 
 // --- Mostrar formulario y registros ---
-include "views/$tab.php";
+include "vistas/$tab.php";
 
 include 'footer.php';
 ?>

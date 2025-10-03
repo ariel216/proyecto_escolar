@@ -1,5 +1,5 @@
 <?php
-$db = new SQLite3('./panel/database.db');
+$db = new SQLite3('./panel/base/database.db');
 
 // Si se envió el formulario
 $estudiante = null;
@@ -20,23 +20,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $id_est = $estudiante['id'];
 
         // Obtener datos relacionados filtrados por estudiante
-        $stmt = $db->prepare("SELECT * FROM asistencias WHERE id_estudiante = :id ORDER BY fecha DESC LIMIT 5");
+        $stmt = $db->prepare("SELECT * FROM asistencias WHERE id_estudiante = :id ORDER BY fecha DESC");
         $stmt->bindValue(':id', $id_est, SQLITE3_INTEGER);
         $resumen['asistencias'] = $stmt->execute();
 
-        $stmt = $db->prepare("SELECT * FROM tareas WHERE id_estudiante = :id ORDER BY fecha DESC LIMIT 5");
+        $stmt = $db->prepare("SELECT * FROM tareas WHERE id_estudiante = :id ORDER BY fecha DESC");
         $stmt->bindValue(':id', $id_est, SQLITE3_INTEGER);
         $resumen['tareas'] = $stmt->execute();
 
-        $stmt = $db->prepare("SELECT * FROM comunicados WHERE id_estudiante = :id ORDER BY fecha DESC LIMIT 5");
-        $stmt->bindValue(':id', $id_est, SQLITE3_INTEGER);
+        $stmt = $db->prepare("SELECT * FROM comunicados ORDER BY fecha DESC");       
         $resumen['comunicados'] = $stmt->execute();
 
-        $stmt = $db->prepare("SELECT * FROM memorandos WHERE id_estudiante = :id ORDER BY fecha DESC LIMIT 5");
+        $stmt = $db->prepare("SELECT * FROM memorandos WHERE id_estudiante = :id ORDER BY fecha DESC");
         $stmt->bindValue(':id', $id_est, SQLITE3_INTEGER);
         $resumen['memorandos'] = $stmt->execute();
 
-        $stmt = $db->prepare("SELECT * FROM mensualidades WHERE id_estudiante = :id ORDER BY fecha_pago DESC LIMIT 5");
+        $stmt = $db->prepare("SELECT * FROM mensualidades WHERE id_estudiante = :id ORDER BY fecha_pago DESC");
         $stmt->bindValue(':id', $id_est, SQLITE3_INTEGER);
         $resumen['mensualidades'] = $stmt->execute();
     }

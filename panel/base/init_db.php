@@ -12,7 +12,8 @@ $db->exec("CREATE TABLE IF NOT EXISTS estudiantes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     carnet TEXT,
     nombre TEXT,
-    curso TEXT
+    curso TEXT,
+    telefono TEXT
 )");
 
 $db->exec("CREATE TABLE IF NOT EXISTS asistencias (
@@ -37,8 +38,7 @@ $db->exec("CREATE TABLE IF NOT EXISTS comunicados (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     titulo TEXT,
     mensaje TEXT,
-    fecha TEXT,
-    id_estudiante INTEGER
+    fecha TEXT
 )");
 
 $db->exec("CREATE TABLE IF NOT EXISTS memorandos (
@@ -64,5 +64,16 @@ $db->exec("CREATE TABLE IF NOT EXISTS usuarios (
     clave TEXT,
     nombre TEXT
 )");
+
+$check = $db->querySingle("SELECT COUNT(*) as count FROM usuarios");
+if ($check == 0) {
+    $password_admin = password_hash('admin123', PASSWORD_DEFAULT);
+    $password_docente = password_hash('docente123', PASSWORD_DEFAULT);
+
+    $db->exec("INSERT INTO usuarios (usuario, clave, nombre) VALUES 
+        ('admin', '$password_admin', 'Administrador del Sistema'),
+        ('profesor', '$password_docente', 'Profesor de Ejemplo')
+    ");
+}
 
 ?>

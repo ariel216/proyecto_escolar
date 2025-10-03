@@ -28,6 +28,7 @@ protegerPagina();
         <li class="nav-item"><a class="nav-link" href="index.php?tab=memorandos">Memorándums</a></li>
         <li class="nav-item"><a class="nav-link" href="index.php?tab=mensualidades">Mensualidades</a></li>
       </ul>
+      <a href="../portal_padres.php" class="btn btn-light">Portal</a>
       <a href="logout.php" class="btn btn-light">Cerrar Sesión</a>
     </div>
   </div>

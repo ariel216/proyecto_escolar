@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$db = new SQLite3('database.db');
+$db = new SQLite3('./base/database.db');
 
 $error = '';
 
