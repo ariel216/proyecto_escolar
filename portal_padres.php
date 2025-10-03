@@ -49,13 +49,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <title>Buscar Estudiante</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+<link rel="stylesheet" href="css/estilos.css" />
 </head>
-<body class="bg-light">
+<body>
 <div class="container py-5">
     <div class="text-center logo mb-3">
         <img src="img/logo.png" alt="Logo" class="rounded-circle"  height="150">
     </div>
-     <h1 class="mb-4 text-center">Portal para Padres</h1>
+     <h1 class="mb-4 text-center text-white">Portal para Padres</h1>
     <!-- Formulario de búsqueda -->
     <div class="card p-4 shadow-sm mb-4">
         <form method="POST">
@@ -87,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="row">
                 <div class="col-md-6">
                     <div class="card shadow-sm mb-4">
-                        <div class="card-header bg-primary text-white">Asistencias</div>
+                        <div class="card-header">Asistencias</div>
                         <ul class="list-group list-group-flush">
                             <?php while ($row = $resumen['asistencias']->fetchArray(SQLITE3_ASSOC)): ?>
                                 <li class="list-group-item">
@@ -100,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <div class="col-md-6">
                     <div class="card shadow-sm mb-4">
-                        <div class="card-header bg-success text-white">Tareas</div>
+                        <div class="card-header">Tareas</div>
                         <ul class="list-group list-group-flush">
                             <?php while ($row = $resumen['tareas']->fetchArray(SQLITE3_ASSOC)): ?>
                                 <li class="list-group-item">
@@ -115,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="row">
                 <div class="col-md-6">
                     <div class="card shadow-sm mb-4">
-                        <div class="card-header bg-warning">Comunicados</div>
+                        <div class="card-header">Comunicados</div>
                         <ul class="list-group list-group-flush">
                             <?php while ($row = $resumen['comunicados']->fetchArray(SQLITE3_ASSOC)): ?>
                                 <li class="list-group-item">
@@ -128,7 +129,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <div class="col-md-6">
                     <div class="card shadow-sm mb-4">
-                        <div class="card-header bg-danger text-white">Memorandos</div>
+                        <div class="card-header">Memorandos</div>
                         <ul class="list-group list-group-flush">
                             <?php while ($row = $resumen['memorandos']->fetchArray(SQLITE3_ASSOC)): ?>
                                 <li class="list-group-item">
@@ -141,7 +142,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
 
             <div class="card shadow-sm mb-4">
-                <div class="card-header bg-info text-white">Mensualidades</div>
+                <div class="card-header">Mensualidades</div>
                 <ul class="list-group list-group-flush">
                     <?php while ($row = $resumen['mensualidades']->fetchArray(SQLITE3_ASSOC)): ?>
                         <li class="list-group-item">

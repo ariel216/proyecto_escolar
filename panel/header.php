@@ -8,10 +8,10 @@ protegerPagina();
   <meta charset="UTF-8">
   <title>Panel de Administración</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilos.css" />
+  <link rel="stylesheet" href="../css/estilos.css" />
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="index.php">Panel de Administración</a>
     

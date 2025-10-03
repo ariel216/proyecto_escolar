@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/estilos.css" />
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
   </head>
-  <body class="bg-primary text-white text-center">
+  <body class="text-white text-center">
     <div class="container py-5">
       <div class="logo mb-3">
         <img src="img/logo.png" alt="Logo" class="rounded-circle"  height="150">
@@ -48,7 +48,7 @@
         </div>
       </div>
 
-      <div class="alert alert-info mt-4 text-start">
+      <div class="alert alert-primary mt-4 text-start">
         <b>Información Importante:</b>
         <ul>
           <li>

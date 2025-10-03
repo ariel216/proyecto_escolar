@@ -1,5 +1,7 @@
 body {
-  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #0044cc 0%, #e63946 100%);
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .card {
@@ -7,5 +9,5 @@ body {
 }
 
 footer {
-  color: #ddd;
+  color: #fff;
 }
